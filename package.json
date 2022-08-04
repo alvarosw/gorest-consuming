@@ -1,0 +1,37 @@
+{
+  "name": "gorest-consuming",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "dev": "concurrently \"tsc --watch\" \"nodemon ./build/server.js\"",
+    "serve": "tsc && node ./build/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alvarosw/gorest-consuming.git"
+  },
+  "keywords": [
+    "gorest",
+    "rest",
+    "api",
+    "node",
+    "express",
+    "typescript"
+  ],
+  "author": "Álvaro Santos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alvarosw/gorest-consuming/issues"
+  },
+  "homepage": "https://github.com/alvarosw/gorest-consuming#readme",
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.18.6",
+    "@types/node": "^18.6.3",
+    "concurrently": "^7.3.0",
+    "eslint": "^8.21.0",
+    "nodemon": "^2.0.19"
+  }
+}
