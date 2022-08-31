@@ -6,7 +6,7 @@ export default class GoRestApi {
   private api: AxiosInstance
   constructor(forModule: string) {
     this.api = axios.create({
-      baseURL: `https://gorest.co.in/public/${GOREST_API_VERSION}/${forModule}/`,
+      baseURL: `https://gorest.co.in/public/${GOREST_API_VERSION}/${forModule}`,
       headers: { Authorization: `Bearer ${GO_REST_TOKEN}` },
     })
   }
@@ -20,7 +20,7 @@ export default class GoRestApi {
 
   async post(body: any) {
     return this.api
-      .post(body)
+      .post('', body)
       .then(({ data }) => data)
       .catch(this.jsonErr)
   }
@@ -40,6 +40,12 @@ export default class GoRestApi {
   }
 
   jsonErr(error: AxiosError) {
-    throw { ...error.toJSON(), config: undefined }
+    if (error.toJSON)
+      throw {
+        ...error.toJSON(),
+        error: error.response?.data || {},
+        config: undefined,
+      }
+    throw new Error(error.message)
   }
 }
