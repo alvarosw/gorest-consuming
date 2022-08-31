@@ -1,42 +1,45 @@
-import axios, { AxiosError } from 'axios'
+import axios, { AxiosError, AxiosInstance } from 'axios'
 
 const { GOREST_API_VERSION, GO_REST_TOKEN } = process.env
 
 export default class GoRestApi {
-  static api = axios.create({
-    baseURL: `https://gorest.co.in/public/${GOREST_API_VERSION}/`,
-    headers: { Authorization: `Bearer ${GO_REST_TOKEN}` },
-  })
+  private api: AxiosInstance
+  constructor(forModule: string) {
+    this.api = axios.create({
+      baseURL: `https://gorest.co.in/public/${GOREST_API_VERSION}/${forModule}/`,
+      headers: { Authorization: `Bearer ${GO_REST_TOKEN}` },
+    })
+  }
 
-  static async get(suffix: string) {
+  async get(id = '') {
     return this.api
-      .get(suffix)
+      .get(id)
       .then(({ data }) => data)
       .catch(this.jsonErr)
   }
 
-  static async post(suffix: string, body: any) {
+  async post(body: any) {
     return this.api
-      .post(suffix, body)
+      .post(body)
       .then(({ data }) => data)
       .catch(this.jsonErr)
   }
 
-  static async update(suffix: string, body: any) {
+  async update(id: string, body: any) {
     return this.api
-      .put(suffix, body)
+      .put(id, body)
       .then(({ data }) => data)
       .catch(this.jsonErr)
   }
 
-  static async remove(suffix: string) {
+  async remove(id: string) {
     return this.api
-      .delete(suffix)
+      .delete(id)
       .then(({ data }) => data)
       .catch(this.jsonErr)
   }
 
-  static jsonErr(error: AxiosError) {
+  jsonErr(error: AxiosError) {
     throw { ...error.toJSON(), config: undefined }
   }
 }
