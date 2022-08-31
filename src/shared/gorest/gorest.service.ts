@@ -18,9 +18,9 @@ export default class GoRestApi {
       .catch(this.jsonErr)
   }
 
-  async post(body: any) {
+  async post(body: any, suffix = '') {
     return this.api
-      .post('', body)
+      .post(suffix, body)
       .then(({ data }) => data)
       .catch(this.jsonErr)
   }
