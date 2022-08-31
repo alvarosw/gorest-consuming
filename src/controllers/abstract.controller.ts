@@ -2,9 +2,9 @@ import { Request, Response } from 'express'
 import GoRestApi from '../shared/gorest/gorest.service'
 
 export default class AbstractController {
-  api: GoRestApi
-  constructor(forModule: string) {
-    this.api = new GoRestApi(forModule)
+  public api: GoRestApi
+  constructor(api: GoRestApi) {
+    this.api = api
   }
 
   get = (req: Request, res: Response) => {
