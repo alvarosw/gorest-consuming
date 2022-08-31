@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import GoRestApi from '../shared/gorest/GoRestApi'
+import GoRestApi from '../shared/gorest/gorest.service'
 
 const api = new GoRestApi('users')
 
